@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Panel\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Panel\UserController;
 
@@ -26,5 +27,9 @@ Route::get('/profile', function () {
     return "this is profile";
 })->middleware(['auth'])->name('profile');
 
-Route::middleware(['auth' , 'admin'])->resource('/panel/users' , UserController::class)->except(['show']);
+
+Route::middleware(['auth' , 'admin'])->prefix('/panel')->group(function (){
+    Route::resource('/users' , UserController::class)->except(['show']);
+    Route::resource('/categories' , CategoryController::class)->except(['show' , 'create']);
+});
 require __DIR__.'/auth.php';

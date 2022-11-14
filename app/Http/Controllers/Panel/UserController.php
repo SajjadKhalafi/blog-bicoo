@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Panel\CreateUserRequest;
-use App\Http\Requests\Panel\UpdateUserRequest;
+use App\Http\Requests\Panel\User\CreateUserRequest;
+use App\Http\Requests\Panel\User\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
