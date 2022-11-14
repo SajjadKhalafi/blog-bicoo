@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Panel\CategoryController;
+use App\Http\Controllers\Panel\EditorUploadController;
+use App\Http\Controllers\Panel\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Panel\UserController;
 
@@ -32,4 +34,11 @@ Route::middleware(['auth' , 'admin'])->prefix('/panel')->group(function (){
     Route::resource('/users' , UserController::class)->except(['show']);
     Route::resource('/categories' , CategoryController::class)->except(['show' , 'create']);
 });
+
+Route::middleware(['auth' , 'author'])->prefix('/panel')->group(function (){
+    Route::resource('/posts' , PostController::class);
+    Route::post('/editor/upload' , [EditorUploadController::class , 'upload'])
+        ->name('editor-upload');
+});
+
 require __DIR__.'/auth.php';

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Post;
 
 class Category extends Model
 {
@@ -24,5 +25,10 @@ class Category extends Model
         return is_null($this->parent)
             ? 'ندارد'
             : $this->parent->name;
+    }
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
     }
 }
