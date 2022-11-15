@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Panel\CategoryController;
+use App\Http\Controllers\Panel\CommentController;
 use App\Http\Controllers\Panel\EditorUploadController;
 use App\Http\Controllers\Panel\PostController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,7 @@ Route::middleware(['auth' , 'author'])->prefix('/panel')->group(function (){
     Route::resource('/posts' , PostController::class);
     Route::post('/editor/upload' , [EditorUploadController::class , 'upload'])
         ->name('editor-upload');
+    Route::resource('/comments' , CommentController::class)->only(['index' , 'destroy', 'update']);
 });
 
 require __DIR__.'/auth.php';
