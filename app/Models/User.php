@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'mobile', 'role'
+        'name', 'email', 'password', 'mobile', 'role', 'profile',
     ];
 
     /**
@@ -48,5 +48,10 @@ class User extends Authenticatable
     public function getCreatedAtInJalali()
     {
         return verta($this->created_at)->format('Y/m/d');
+    }
+
+    public function getProfileUrl()
+    {
+        return asset('images/users/' . auth()->user()->profile);
     }
 }
