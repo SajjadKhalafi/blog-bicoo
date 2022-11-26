@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Panel\CategoryController;
 use App\Http\Controllers\Panel\CommentController;
+use App\Http\Controllers\Panel\DashboardController;
 use App\Http\Controllers\Panel\EditorUploadController;
 use App\Http\Controllers\Panel\PostController;
 use App\Http\Controllers\Panel\ProfileController;
@@ -36,9 +37,7 @@ Route::middleware(['auth' , 'author'])->prefix('/panel')->group(function (){
 });
 
 Route::middleware(['auth'])->group(function (){
-    Route::get('/dashboard', function () {
-        return view('panel.index');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class , 'index'] )->name('dashboard');
 
     Route::get('/profile', [ProfileController::class , 'show'])->name('profile');
     Route::put('/profile', [ProfileController::class , 'update'])->name('profile.update');
