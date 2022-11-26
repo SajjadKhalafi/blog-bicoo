@@ -27,6 +27,11 @@ class Category extends Model
             : $this->parent->name;
     }
 
+    public function children()
+    {
+        return $this->hasMany(Category::class , 'category_id');
+    }
+
     public function posts()
     {
         return $this->belongsToMany(Post::class);

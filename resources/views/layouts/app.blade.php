@@ -39,13 +39,15 @@
                     <div class="c-header__button-nav"></div>
                 </div>
                 @guest()
-                <div class="c-button__login-regsiter">
-                    <div><a class="c-button__link c-button--login" href="{{ route('login') }}">ورود</a></div>
-                    <div><a class="c-button__link c-button--register" href="{{ route('register') }}">ثبت نام</a></div>
-                </div>
+                    <div class="c-button__login-regsiter">
+                        <div><a class="c-button__link c-button--login" href="{{ route('login') }}">ورود</a></div>
+                        <div><a class="c-button__link c-button--register" href="{{ route('register') }}">ثبت نام</a>
+                        </div>
+                    </div>
                 @else
                     <div style="width: 180px;">
-                        <div class="dropdown-select wide" tabindex="0" id="dropdown-user" onclick="toggleUserDropdown()">
+                        <div class="dropdown-select wide" tabindex="0" id="dropdown-user"
+                             onclick="toggleUserDropdown()">
                             <span class="current">
                                 {{ auth()->user()->name }}
                             </span>
@@ -56,7 +58,8 @@
                                             پروفایل
                                         </a>
                                     </li>
-                                    <li class="option" data-value="0" data-display-text="" tabindex="0" onclick="logoutUser()">
+                                    <li class="option" data-value="0" data-display-text="" tabindex="0"
+                                        onclick="logoutUser()">
                                         خروج
                                     </li>
                                 </ul>
@@ -78,36 +81,17 @@
         <div class="container container--nav">
             <ul class="nav__ul">
                 <li class="nav__item"><a href="#" class="nav__link">صفحه اصلی</a></li>
-                <li class="nav__item nav__item--has-sub"><a href="#" class="nav__link">برنامه نویسی</a>
-                    <div class="nav__sub">
-                        <div class="container d-flex item-center flex-wrap container--nav">
-                            <a href="" class="nav__link">لینک یک </a>
-                            <a href="" class="nav__link">php</a>
-                            <a href="" class="nav__link">لینک سه</a>
-                            <a href="" class="nav__link">php</a>
+                @foreach($categories as $category)
+                    <li class="nav__item nav__item--has-sub"><a href="#" class="nav__link">{{ $category->name }}</a>
+                        <div class="nav__sub">
+                            <div class="container d-flex item-center flex-wrap container--nav">
+                                @foreach($category->children as $childCategory)
+                                    <a href="#" class="nav__link">{{ $childCategory->name }}</a>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <li class="nav__item nav__item--has-sub"><a href="#" class="nav__link">هک و امنیت</a>
-                    <div class="nav__sub">
-                        <div class="container d-flex item-center flex-wrap container--nav">
-                            <a href="" class="nav__link">لینک یک </a>
-                            <a href="" class="nav__link">c++</a>
-                            <a href="" class="nav__link">لینک سه</a>
-                            <!--                            <a href="" class="nav__sub-link">php</a>-->
-                        </div>
-                    </div>
-                </li>
-                <li class="nav__item nav__item--has-sub"><a href="#" class="nav__link">هک و امنیت</a>
-                    <div class="nav__sub">
-                        <div class="container d-flex item-center flex-wrap container--nav">
-                            <a href="" class="nav__link">لینک یک </a>
-                            <a href="" class="nav__link">c++</a>
-                            <a href="" class="nav__link">لینک سه</a>
-                            <!--                            <a href="" class="nav__sub-link">php</a>-->
-                        </div>
-                    </div>
-                </li>
+                    </li>
+                @endforeach
                 <li class="nav__item"><a href="#" class="nav__link">درباره ما</a></li>
                 <li class="nav__item"><a href="#" class="nav__link">تماس باما</a></li>
             </ul>
@@ -189,11 +173,11 @@
 <script src="{{ asset('/blog/js/js.js') }}"></script>
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>-->
 <script>
-    function toggleUserDropdown(){
+    function toggleUserDropdown() {
         document.getElementById('dropdown-user').classList.toggle('open');
     }
 
-    function logoutUser(){
+    function logoutUser() {
         document.getElementById('logout-form').submit();
     }
 </script>
