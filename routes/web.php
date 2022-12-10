@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\CommentController as StoreCommentController;
 use App\Http\Controllers\Panel\CategoryController;
 use App\Http\Controllers\Panel\CommentController;
 use App\Http\Controllers\Panel\DashboardController;
@@ -25,6 +26,8 @@ use App\Http\Controllers\Panel\UserController;
 Route::get('/', [LandingController::class , 'index'])->name('landing');
 
 Route::get('/post/{post:slug}' , [ShowPostController::class, 'show'])->name('post.show');
+
+Route::post('/comment' , [StoreCommentController::class, 'store'])->name('comment.store');
 
 Route::middleware(['auth' , 'admin'])->prefix('/panel')->group(function (){
     Route::resource('/users' , UserController::class)->except(['show']);
