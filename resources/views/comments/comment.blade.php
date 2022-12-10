@@ -8,13 +8,14 @@
                             <img src="{{ $comment->user->getProfileUrl() }}" height="50" class="comments__img">
                         </div>
                         <div class="comments__details">
-                            <h5 class="comments__author"><span class="comments__author-name">{{ $comment->user->name }}</span>
+                            <h5 class="comments__author"><span
+                                    class="comments__author-name">{{ $comment->user->name }}</span>
                             </h5>
                             <span class="comments_date"> {{ $comment->created_at->diffForHumans() }} </span>
                         </div>
                     </div>
-                    <a href="#comments" class="btn btn--blue btn--shadow-blue btn--comments-reply">ارسال
-                        پاسخ</a>
+                    <a href="#comments" onclick="setReplyValue({{ $comment->id }})" class="btn btn--blue btn--shadow-blue btn--comments-reply">ارسال پاسخ</a>
+
                 </div>
             </div>
             <p class="comments__body">

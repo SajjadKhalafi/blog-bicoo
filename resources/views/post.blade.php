@@ -41,7 +41,7 @@
         </div>
         <div class="container">
             <div class="comments" id="comments">
-                @auth()
+                @auth
                     <div class="comments__send">
                         <div class="comments__title">
                             <h3 class="comments__h3"> دیدگاه خود را بنویسید </h3>
@@ -50,9 +50,10 @@
                         <form action="{{ route('comment.store') }}" method="post">
                             @csrf
                             <input type="hidden" name="post_id" value="{{ $post->id }}">
-                            <textarea name="content" class="comments__textarea" placeholder="بنویسید"></textarea>
-                            <button class="btn btn--blue btn--shadow-blue" type="submit">ارسال نظر</button>
-                            <button class="btn btn--red btn--shadow-red" type="reset">انصراف</button>
+                            <input type="hidden" name="comment_id" value="" id="reply-input">
+                            <textarea class="comments__textarea" name="content" placeholder="بنویسید"></textarea>
+                            <button class="btn btn--blue btn--shadow-blue">ارسال نظر</button>
+                            <button class="btn btn--red btn--shadow-red">انصراف</button>
                         </form>
                     </div>
                 @else
@@ -60,10 +61,17 @@
                 @endauth
                 <div class="comments__list">
                     @foreach($post->comments as $comment)
-                        @include('comments.comment' , ['comment' => $comment])
+                        @include('comments.comment', ['comment' => $comment])
                     @endforeach
                 </div>
             </div>
         </div>
     </main>
+    <x-slot name="scripts">
+        <script>
+            function setReplyValue(id) {
+                document.getElementById('reply-input').value = id;
+            }
+        </script>
+    </x-slot>
 </x-app-layout>
