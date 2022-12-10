@@ -47,4 +47,9 @@ class Post extends Model
     {
         return asset('images/banners/'. $this->banner);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

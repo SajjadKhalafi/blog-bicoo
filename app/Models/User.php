@@ -52,6 +52,6 @@ class User extends Authenticatable
 
     public function getProfileUrl()
     {
-        return asset('images/users/' . auth()->user()->profile);
+        return asset('images/users/' . $this->profile);
     }
 }
