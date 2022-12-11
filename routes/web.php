@@ -9,6 +9,7 @@ use App\Http\Controllers\Panel\DashboardController;
 use App\Http\Controllers\Panel\EditorUploadController;
 use App\Http\Controllers\Panel\PostController;
 use App\Http\Controllers\Panel\ProfileController;
+use App\Http\Controllers\ShowPostCategoryController;
 use App\Http\Controllers\ShowPostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Panel\UserController;
@@ -32,6 +33,7 @@ Route::post('/comment' , [StoreCommentController::class, 'store'])->name('commen
 
 Route::middleware(['auth', 'throttle:like'])->post('/like/{post:slug}', [LikePostController::class, 'store'])->name('like.post');
 
+Route::get('/category/{category:slug}' , [ShowPostCategoryController::class , 'show'])->name('category.show');
 
 Route::middleware(['auth' , 'admin'])->prefix('/panel')->group(function (){
     Route::resource('/users' , UserController::class)->except(['show']);
