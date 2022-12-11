@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return asset('images/users/' . $this->profile);
     }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Post::class , 'likes');
+    }
 }

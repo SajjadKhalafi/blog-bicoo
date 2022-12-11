@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\CommentController as StoreCommentController;
+use App\Http\Controllers\LikePostController;
 use App\Http\Controllers\Panel\CategoryController;
 use App\Http\Controllers\Panel\CommentController;
 use App\Http\Controllers\Panel\DashboardController;
@@ -29,6 +30,9 @@ Route::get('/post/{post:slug}' , [ShowPostController::class, 'show'])->name('pos
 
 Route::post('/comment' , [StoreCommentController::class, 'store'])->name('comment.store');
 
+Route::middleware(['auth', 'throttle:like'])->post('/like/{post:slug}', [LikePostController::class, 'store'])->name('like.post');
+
+
 Route::middleware(['auth' , 'admin'])->prefix('/panel')->group(function (){
     Route::resource('/users' , UserController::class)->except(['show']);
     Route::resource('/categories' , CategoryController::class)->except(['show' , 'create']);
@@ -46,6 +50,7 @@ Route::middleware(['auth'])->group(function (){
 
     Route::get('/profile', [ProfileController::class , 'show'])->name('profile');
     Route::put('/profile', [ProfileController::class , 'update'])->name('profile.update');
+
 });
 
 require __DIR__.'/auth.php';
