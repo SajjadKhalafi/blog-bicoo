@@ -29,10 +29,13 @@
                         </a>
                     </div>
                 @empty
-                    <p>هیچ پستی یافت نشد</p>
+                    <div class="articles__item">
+                        <h3>نتایج جستجو برای: "{{ request()->search ?? request()->category->name }}"</h3>
+                        <p>این جستجو دارای ۰ نتیجه است.</p>
+                    </div>
                 @endforelse
             </div>
         </article>
-        {{ $posts->links() }}
+        {{ $posts->appends(request()->query())->links() }}
     </main>
 </x-app-layout>
